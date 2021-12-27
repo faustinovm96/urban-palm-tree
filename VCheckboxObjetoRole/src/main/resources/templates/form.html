@@ -10,6 +10,13 @@
 	<form th:action="@{/form}" th:object="${empleado}" method="post">
 
 		<div>
+			<label for="habilitar">Habilitar</label>
+			<div>
+				<input type="checkbox" th:field="*{habilitar}" id="${habilitar}">
+			</div>
+		</div>
+
+		<div>
 			<label for="pais">Pais</label>
 			<div>
 				<select id="pais" th:field="*{pais}">
@@ -23,9 +30,9 @@
 		
 		<div>
 			<label>ROLES</label>
-			<div th:each="role: ${listaRolesMap.entrySet()}">
-				<input type="checkbox" th:field="*{roles}" th:value="${role.key}">
-				<label th:for="${#ids.prev('roles')}" th:text="${role.value}"></label>
+			<div th:each="role: ${listaRolesObjeto}">
+				<input type="checkbox" th:field="*{roles}" th:value="${role.id}">
+				<label th:for="${#ids.prev('roles')}" th:text="${role.nombre}"></label>
 			</div>
 
 			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
@@ -35,6 +42,21 @@
 			<label for="cedula">Cédula de Identidad</label>
 			<div>
 				<input type="text" id="cedula" th:field="*{cedula}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"></div>
+		</div>
+		
+		<div>
+			<label>Género</label>
+			<div>
+				<input type="radio" id="genero1" th:field="*{genero}" value="Hombre">
+				<label for="genero1">Hombre</label>
+			</div>
+			
+			<div>
+				<input type="radio" id="genero2" th:field="*{genero}" value="Mujer">
+				<label for="genero2">Mujer</label>
 			</div>
 
 			<div th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"></div>

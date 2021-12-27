@@ -27,9 +27,12 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.formularios.editors.NombreMayusculaEditor;
 import com.formularios.editors.PaisPropertyEditor;
+import com.formularios.editors.RolePropertyEditor;
 import com.formularios.models.domain.Empleado;
 import com.formularios.models.domain.Pais;
+import com.formularios.models.domain.Role;
 import com.formularios.services.PaisService;
+import com.formularios.services.RoleService;
 import com.formularios.validations.EmpleadoValidador;
 
 @Controller
@@ -45,6 +48,12 @@ public class FormController {
 	@Autowired
 	private PaisPropertyEditor paisPropertyEditor;
 	
+	@Autowired
+	private RoleService roleService;
+	
+	@Autowired
+	private RolePropertyEditor roleEditor;
+	
 	@InitBinder
 	public void initBinder(WebDataBinder binder) {
 		//binder.setValidator(validador); //Reemplaza el validador por defecto
@@ -54,11 +63,13 @@ public class FormController {
 		binder.registerCustomEditor(Date.class, "fecha",new CustomDateEditor(dateFormat, true));
 		binder.registerCustomEditor(String.class, "nombre", new NombreMayusculaEditor());
 		binder.registerCustomEditor(Pais.class, "pais", paisPropertyEditor); //Estuviste una hora bucsando el error y era cambiar el tipo de dato a PAis osea al objeto que utiliza el Property
+		binder.registerCustomEditor(Role.class, "roles", roleEditor);
 	}
 	
 	@GetMapping("/form")
 	public String form(Model model) {
 		Empleado empleado = new Empleado();
+		empleado.setHabilitar(true);
 		/*persona.setDireccion("HOLA");
 		persona.setCedula("1.111.111");*/
 		model.addAttribute("titulo", "Formulario de Empleado");
@@ -124,6 +135,11 @@ public class FormController {
 		roles.put("ROLE_CONTADOR", "Contador");
 				
 		return roles;
+	}
+	
+	@ModelAttribute("listaRolesObjeto")
+	public List<Role> listarRolesPorObjeto(){
+		return this.roleService.listarRoles();
 	}
 	
 }

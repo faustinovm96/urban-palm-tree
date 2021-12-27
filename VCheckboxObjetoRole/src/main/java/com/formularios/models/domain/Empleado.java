@@ -61,13 +61,34 @@ public class Empleado {
 	private Pais pais;
 	
 	@NotEmpty
-	private List<String> roles;
+	private List<Role> roles;
+	
+	private Boolean habilitar;
+	
+	@NotEmpty
+	private String genero;
 
-	public List<String> getRoles() {
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
+	}
+
+	public Boolean getHabilitar() {
+		return habilitar;
+	}
+
+	public void setHabilitar(Boolean habilitar) {
+		this.habilitar = habilitar;
+	}
+
+	public List<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(List<String> roles) {
+	public void setRoles(List<Role> roles) {
 		this.roles = roles;
 	}
 

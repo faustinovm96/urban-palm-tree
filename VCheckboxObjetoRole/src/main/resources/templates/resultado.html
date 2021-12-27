@@ -19,12 +19,14 @@
 			<li th:text="${empleado.pais.id}"></li>
 			<li th:text="${empleado.pais.codigo}"></li>
 			<li th:text="${empleado.pais.nombre}"></li>
+			<li th:text="${empleado.habilitar}"></li>
+			<li th:text="'Genero:' + ${empleado.genero}"></li>
 		</ul>
 	</div>
 	
 	<div>Roles</div>
 	<ul>
-		<li th:each="role: ${empleado.roles}" th:text="${role}"></li>
+		<li th:each="role: ${empleado.roles}" th:text="${role.id} + ':' + ${role.nombre} + '=>' + ${role.role}"></li>
 	</ul>
 </body>
 </html>
