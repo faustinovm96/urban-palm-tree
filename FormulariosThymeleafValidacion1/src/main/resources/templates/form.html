@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<form th:action="@{/form}" method="post">
+
+			<div>
+				<label for="ruc">RUC</label>
+				<div>
+					<input type="text" name="ruc" id="ruc" th:value="${persona.ruc}" />
+				</div>
+
+				<div th:if="${error != null && error.containsKey('ruc')}" th:text="${error.ruc}"></div>
+			</div>
+
+			<div>
+				<label for="nombre">Nombre o Razón Social</label>
+				<div>
+					<input type="text" name="nombre" id="nombre"
+						th:value="${persona.nombre}" />
+				</div>
+
+				<div th:if="${error != null && error.containsKey('nombre')}"
+					th:text="${error.nombre}"></div>
+			</div>
+
+			<div>
+				<label for="direccion">Direccion</label>
+				<div>
+					<input type="text" name="direccion" id="direccion"
+						th:value="${persona.direccion}" />
+				</div>
+
+				<div th:if="${error != null && error.containsKey('direccion')}"
+					th:text="${error.direccion}"></div>
+			</div>
+
+			<div>
+				<label for="telefono">Telefono</label>
+				<div>
+					<input type="text" name="telefono" id="telefono"
+						th:value="${persona.telefono}" />
+				</div>
+				
+				<div th:if="${error != null && error.containsKey('telefono')}"
+					th:text="${error.telefono}"></div>
+			</div>
+			<div>
+				<input type="submit" name="enviar" id="telefono">Enviar</input>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

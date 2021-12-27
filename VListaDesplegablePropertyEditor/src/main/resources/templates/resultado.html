@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+
+	<h3>Resultados</h3>
+	<div>
+		<ul>
+			<li th:text="${empleado.cedula}"></li>
+			<li th:text="${empleado.nombre}"></li>
+			<li th:text="${empleado.direccion}"></li>
+			<li th:text="${empleado.telefono}"></li>
+			<li th:text="${empleado.email}"></li>
+			<li th:text="${#calendars.format(empleado.fecha, 'dd/MM/yyyy')}"></li>
+			<li th:text="${#dates.format(empleado.fecha, 'dd/MM/yyyy')}"></li>
+			<li th:text="${empleado.pais.id}"></li>
+			<li th:text="${empleado.pais.codigo}"></li>
+			<li th:text="${empleado.pais.nombre}"></li>
+		</ul>
+	</div>
+</body>
+</html>

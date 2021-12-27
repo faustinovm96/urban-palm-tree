@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+
+	<h3>Formulario de Empleado</h3>
+	<form th:action="@{/form}" th:object="${empleado}" method="post">
+
+		<div>
+			<label for="cedula">Cédula de Identidad</label>
+			<div>
+				<input type="text" id="cedula" th:field="*{cedula}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"></div>
+		</div>
+
+		<div>
+			<label for="nombre">Nombre o Razón Social</label>
+			<div>
+				<input type="text" id="nombre" th:field="*{nombre}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+		</div>
+
+		<div>
+			<label for="direccion">Direccion</label>
+			<div>
+				<input type="text" id="direccion" th:field="*{direccion}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('direccion')}"
+				th:errors="*{direccion}"></div>
+		</div>
+
+		<div>
+			<label for="telefono">Telefono</label>
+			<div>
+				<input type="text" id="telefono" th:field="*{telefono}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+		</div>
+
+		<div>
+			<div>
+				<input type="submit" value="Enviar" />
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>
