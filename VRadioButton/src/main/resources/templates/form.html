@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+</head>
+<body>
+
+	<h3>Formulario de Empleado</h3>
+	<form th:action="@{/form}" th:object="${empleado}" method="post">
+
+		<div>
+			<label for="habilitar">Habilitar</label>
+			<div>
+				<input type="checkbox" th:field="*{habilitar}" id="${habilitar}">
+			</div>
+		</div>
+
+		<div>
+			<label for="pais">Pais</label>
+			<div>
+				<select id="pais" th:field="*{pais}">
+					<option value="">---- Seleccione ----</option>
+					<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}" th:value="${pais.id}"></option>
+				</select>
+			</div>
+
+			<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+		</div>
+		
+		<div>
+			<label>ROLES</label>
+			<div th:each="role: ${listaRolesObjeto}">
+				<input type="checkbox" th:field="*{roles}" th:value="${role.id}">
+				<label th:for="${#ids.prev('roles')}" th:text="${role.nombre}"></label>
+			</div>
+
+			<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
+		</div>
+
+		<div>
+			<label for="cedula">Cédula de Identidad</label>
+			<div>
+				<input type="text" id="cedula" th:field="*{cedula}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"></div>
+		</div>
+		
+		<div>
+			<label>Género</label>
+			<div th:each="gen: ${genero}">
+				<input type="radio" th:field="*{genero}" th:value="${gen}">
+				<label th:for="${#ids.prev('genero')}" th:text="${gen}"></label>
+				<!-- Cada vez que se utiliza ids.prev se quita el atributo id para que se genere automaticamente -->
+			</div>
+
+			<div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+		</div>
+
+		<div>
+			<label for="nombre">Nombre o Razón Social</label>
+			<div>
+				<input type="text" id="nombre" th:field="*{nombre}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+		</div>
+
+		<div>
+			<label for="direccion">Direccion</label>
+			<div>
+				<input type="text" id="direccion" th:field="*{direccion}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('direccion')}"
+				th:errors="*{direccion}"></div>
+		</div>
+
+		<div>
+			<label for="telefono">Telefono</label>
+			<div>
+				<input type="text" id="telefono" th:field="*{telefono}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+		</div>
+
+		<div>
+			<label for="email">E-mail</label>
+			<div>
+				<input type="text" id="email" th:field="*{email}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+		</div>
+
+		<div>
+			<label for="cuenta">Nro de Cuenta</label>
+			<div>
+				<input type="text" id="cuenta" th:field="*{cuenta}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
+		</div>
+
+		<div>
+			<label for="fecha">Fecha de Nacimiento</label>
+			<div>
+				<input type="date" id="fecha" th:field="*{fecha}">
+			</div>
+
+			<div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></div>
+		</div>
+
+
+
+		<div>
+			<div>
+				<input type="submit" value="Enviar" />
+			</div>
+		</div>
+	</form>
+
+</body>
+</html>
