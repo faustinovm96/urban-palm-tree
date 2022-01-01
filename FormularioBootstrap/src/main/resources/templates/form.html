@@ -13,31 +13,35 @@
 		<h3>Formulario de Empleado</h3>
 		<form th:action="@{/form}" th:object="${empleado}" method="post">
 
-			<div class="form-group">
-				<label for="habilitar">Habilitar</label>
-				<div>
-					<input type="checkbox" th:field="*{habilitar}" id="${habilitar}" class="form-control">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label for="pais">Pais</label>
-				<div>
-					<select id="pais" th:field="*{pais}" class="form-control">
-						<option value="">---- Seleccione ----</option>
-						<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}"
-							th:value="${pais.id}"></option>
-					</select>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="habilitar">Habilitar</label>
+					<div>
+						<input type="checkbox" th:field="*{habilitar}" id="${habilitar}"
+							class="form-control form-control-lg">
+					</div>
 				</div>
 
-				<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+				<div class="form-group  col-md-6">
+					<label for="pais">Pais</label>
+					<div>
+						<select id="pais" th:field="*{pais}" class="form-control">
+							<option value="">---- Seleccione ----</option>
+							<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}"
+								th:value="${pais.id}"></option>
+						</select>
+					</div>
+
+					<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"></div>
+				</div>
 			</div>
 
 			<div class="form-group">
 				<label>ROLES</label>
 				<div th:each="role: ${listaRolesObjeto}">
 					<input type="checkbox" th:field="*{roles}" th:value="${role.id}"
-						th:checked="${#lists.contains(empleado.roles, role)}" class="form-control"> <label
+						th:checked="${#lists.contains(empleado.roles, role)}"
+						class="form-control"> <label
 						th:for="${#ids.prev('roles')}" th:text="${role.nombre}"></label>
 				</div>
 
@@ -47,7 +51,8 @@
 			<div class="form-group">
 				<label for="cedula">Cédula de Identidad</label>
 				<div>
-					<input type="text" id="cedula" th:field="*{cedula}" class="form-control">
+					<input type="text" id="cedula" th:field="*{cedula}"
+						class="form-control">
 				</div>
 
 				<div th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"></div>
@@ -56,56 +61,65 @@
 			<div class="form-group">
 				<label>Género</label>
 				<div th:each="gen: ${genero}">
-					<input type="radio" th:field="*{genero}" th:value="${gen}" class="form-control">
-					<label th:for="${#ids.prev('genero')}" th:text="${gen}"></label>
+					<input type="radio" th:field="*{genero}" th:value="${gen}"
+						class="form-control"> <label
+						th:for="${#ids.prev('genero')}" th:text="${gen}"></label>
 					<!-- Cada vez que se utiliza ids.prev se quita el atributo id para que se genere automaticamente -->
 				</div>
 
 				<div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
 			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="nombre">Nombre o Razón Social</label>
+					<div>
+						<input type="text" id="nombre" th:field="*{nombre}"
+							class="form-control">
+					</div>
 
-			<div class="form-group">
-				<label for="nombre">Nombre o Razón Social</label>
-				<div>
-					<input type="text" id="nombre" th:field="*{nombre}" class="form-control">
+					<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
 				</div>
 
-				<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
-			</div>
+				<div class="form-group col-md-6">
+					<label for="direccion">Direccion</label>
+					<div>
+						<input type="text" id="direccion" th:field="*{direccion}"
+							class="form-control">
+					</div>
 
-			<div class="form-group">
-				<label for="direccion">Direccion</label>
-				<div>
-					<input type="text" id="direccion" th:field="*{direccion}" class="form-control">
+					<div th:if="${#fields.hasErrors('direccion')}"
+						th:errors="*{direccion}"></div>
 				</div>
-
-				<div th:if="${#fields.hasErrors('direccion')}"
-					th:errors="*{direccion}"></div>
 			</div>
-
-			<div class="form-group">
+			
+			<div class="form-row">
+			<div class="form-group col-md-6">
 				<label for="telefono">Telefono</label>
 				<div>
-					<input type="text" id="telefono" th:field="*{telefono}" class="form-control">
+					<input type="text" id="telefono" th:field="*{telefono}"
+						class="form-control">
 				</div>
 
 				<div th:if="${#fields.hasErrors('telefono')}"
 					th:errors="*{telefono}"></div>
 			</div>
 
-			<div class="form-group">
+			<div class="form-group col-md-6">
 				<label for="email">E-mail</label>
 				<div>
-					<input type="text" id="email" th:field="*{email}" class="form-control">
+					<input type="text" id="email" th:field="*{email}"
+						class="form-control">
 				</div>
 
 				<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+			</div>
 			</div>
 
 			<div class="form-group">
 				<label for="cuenta">Nro de Cuenta</label>
 				<div>
-					<input type="text" id="cuenta" th:field="*{cuenta}" class="form-control">
+					<input type="text" id="cuenta" th:field="*{cuenta}"
+						class="form-control">
 				</div>
 
 				<div th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"></div>
@@ -114,7 +128,8 @@
 			<div class="form-group">
 				<label for="fecha">Fecha de Nacimiento</label>
 				<div>
-					<input type="date" id="fecha" th:field="*{fecha}" class="form-control">
+					<input type="date" id="fecha" th:field="*{fecha}"
+						class="form-control">
 				</div>
 
 				<div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></div>
@@ -126,7 +141,7 @@
 
 			<div>
 				<div>
-					<input type="submit" value="Enviar"  class="btn btn-success"/>
+					<input type="submit" value="Enviar" class="btn btn-success" />
 				</div>
 			</div>
 		</form>
