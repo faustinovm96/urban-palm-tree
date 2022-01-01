@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}"></title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+</head>
+<body>
+<section th:replace="componentes/tiempo :: interceptorTiempo"></section>
+
+	<h3>Formulario de Empleado</h3>
+	<div class="container">
+
+
+		<form th:action="@{/form}" th:object="${empleado}" method="post">
+
+			<div class="form-group row">
+				<label for="habilitar" class="col-form-label col-sm-2">Habilitar</label>
+				<div class="row col-sm-4">
+
+					<input type="checkbox" th:field="*{habilitar}" id="${habilitar}"
+						class="form-control col-sm-1">
+				</div>
+			</div>
+
+			<div class="form-group row">
+				<label class="col-form-label col-sm-2">Género</label>
+				<div th:each="gen: ${genero}" class="row col-sm-2">
+					<input type="radio" th:field="*{genero}" th:value="${gen}"
+						class="form-control col-sm-2"> <label
+						th:for="${#ids.prev('genero')}" th:text="${gen}"
+						class="col-form-label col-sm-2"></label>
+					<!-- Cada vez que se utiliza ids.prev se quita el atributo id para que se genere automaticamente -->
+				</div>
+
+				<div th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"
+					class="alert alert-danger"></div>
+			</div>
+
+			<div class="form-group row">
+				<label for="pais" class="col-form-label col-sm-2">Pais</label>
+				<div class="col-sm-4">
+					<select id="pais" th:field="*{pais}" class="form-control">
+						<option value="">---- Seleccione ----</option>
+						<option th:each="pais: ${listaPaises}" th:text="${pais.nombre}"
+							th:value="${pais.id}"></option>
+					</select>
+				</div>
+
+				<div th:if="${#fields.hasErrors('pais')}" th:errors="*{pais}"
+					class="alert alert-danger"></div>
+			</div>
+
+
+			<div class="form-group row">
+				<label class="col-form-label col-sm-2">ROLES</label>
+				<div th:each="role: ${listaRolesObjeto}" class="row col-sm-2">
+					<input type="checkbox" th:field="*{roles}" th:value="${role.id}"
+						th:checked="${#lists.contains(empleado.roles, role)}"
+						class="form-control col-sm-2"> <label
+						th:for="${#ids.prev('roles')}" th:text="${role.nombre}"
+						class="col-form-label col-sm-2"></label>
+				</div>
+
+				<div th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"
+					class="alert alert-danger"></div>
+			</div>
+
+			<div class="form-group row">
+				<label for="cedula" class="col-form-label col-sm-2">Cédula
+					de Identidad</label>
+				<div class="col-sm-4">
+					<input type="text" id="cedula" th:field="*{cedula}"
+						class="form-control">
+				</div>
+
+				<div th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}"
+					class="alert alert-danger"></div>
+			</div>
+
+			<div class="form-group row">
+				<label for="nombre" class="col-form-label col-sm-2">Nombre o Razón Social</label>
+				<div class="col-sm-4">
+					<input type="text" id="nombre" th:field="*{nombre}"
+						class="form-control">
+				</div>
+
+				<div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"
+					class="alert alert-danger"></div>
+			</div>
+
+			<div class="form-group row">
+				<label for="direccion" class="col-form-label col-sm-2">Direccion</label>
+				<div class="col-sm-4">
+					<input type="text" id="direccion" th:field="*{direccion}"
+						class="form-control">
+				</div>
+
+				<div th:if="${#fields.hasErrors('direccion')}"
+					th:errors="*{direccion}" class="alert alert-danger"></div>
+			</div>
+
+
+			<div class="form-group row">
+				<label for="telefono" class="col-form-label col-sm-2">Telefono</label>
+				<div class="col-sm-4">
+					<input type="text" id="telefono" th:field="*{telefono}"
+						class="form-control">
+				</div>
+				<div th:if="${#fields.hasErrors('telefono')}"
+					th:errors="*{telefono}" class="alert alert-danger"></div>
+			</div>
+
+			<div class="form-group row">
+				<label for="email" class="col-form-label col-sm-2">E-mail</label>
+				<div class="col-sm-4">
+					<input type="text" id="email" th:field="*{email}"
+						class="form-control">
+				</div>
+
+				<div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+					class="alert alert-danger"></div>
+			</div>
+
+
+			<div class="form-group row">
+				<label for="cuenta" class="col-form-label col-sm-2">Nro de
+					Cuenta</label>
+				<div class="col-sm-4">
+					<input type="text" id="cuenta" th:field="*{cuenta}"
+						class="form-control">
+				</div>
+
+				<div th:if="${#fields.hasErrors('cuenta')}" th:errors="*{cuenta}"
+					class="alert alert-danger"></div>
+			</div>
+
+			<div class="form-group row">
+				<label for="fecha" class="col-form-label col-sm-2">Fecha de
+					Nacimiento</label>
+				<div class="col-sm-4">
+					<input type="date" id="fecha" th:field="*{fecha}"
+						class="form-control">
+				</div>
+
+				<div th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"
+					class="alert alert-danger"></div>
+			</div>
+
+			<div class="form-group row">
+				<input type="hidden" th:field="*{valorOculto}">
+			</div>
+
+			<div class="form-group row">
+				<div class="col-sm-4">
+					<input type="submit" value="Enviar" class="btn btn-primary" />
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>
