@@ -1,14 +1,18 @@
-package com.spingboot.app.models.domain;
+package com.bolsadeideas.springboot.app.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,18 +26,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "clientes")
 public class Cliente implements Serializable {
 
-	private static final long serialVersionUID = -7958281620691135952L;
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotEmpty
-	private String nombres;
-	
+	private String nombre;
+
 	@NotEmpty
-	private String apellidos;
-	
+	private String apellido;
+
 	@NotEmpty
 	@Email
 	private String email;
@@ -41,24 +43,18 @@ public class Cliente implements Serializable {
 	@NotNull
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "yyyy-mm-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createAt;
-	
+
+	@OneToMany(mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Factura> facturas;
+
 	private String foto;
 
-	public String getFoto() {
-		return foto;
+	public Cliente() {
+		facturas = new ArrayList<Factura>();
 	}
 
-	public void setFoto(String foto) {
-		this.foto = foto;
-	}
-
-	@PrePersist
-	public void prePersist() {
-		createAt = new Date();
-	}
-	
 	public Long getId() {
 		return id;
 	}
@@ -67,20 +63,20 @@ public class Cliente implements Serializable {
 		this.id = id;
 	}
 
-	public String getNombres() {
-		return nombres;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setNombres(String nombres) {
-		this.nombres = nombres;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 
-	public String getApellidos() {
-		return apellidos;
+	public String getApellido() {
+		return apellido;
 	}
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
 	}
 
 	public String getEmail() {
@@ -98,21 +94,31 @@ public class Cliente implements Serializable {
 	public void setCreateAt(Date createAt) {
 		this.createAt = createAt;
 	}
-	
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
+
+	public List<Factura> getFacturas() {
+		return facturas;
+	}
+
+	public void setFacturas(List<Factura> facturas) {
+		this.facturas = facturas;
+	}
+
+	public void addFactura(Factura factura) {
+		facturas.add(factura);
+	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-	public Cliente() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Cliente(Long id, String nombres, String apellidos, String email, Date createAt) {
-		this.id = id;
-		this.nombres = nombres;
-		this.apellidos = apellidos;
-		this.email = email;
-		this.createAt = createAt;
-	}
+	private static final long serialVersionUID = 1L;
 
 }
