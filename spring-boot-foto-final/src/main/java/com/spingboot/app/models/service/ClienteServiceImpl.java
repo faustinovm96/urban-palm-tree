@@ -17,6 +17,7 @@ import com.spingboot.app.models.domain.Cliente;
 public class ClienteServiceImpl implements IClienteService {
 
 	@Autowired
+	@Qualifier("clienteDaoCRUD")
 	private IClienteDaoCrud clienteDao;
 	
 	@Override
